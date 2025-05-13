@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmCritic - Обзоры фильмов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Film<span>Critic</span></a>
+            
+            <button class="burger-btn" id="burger-btn" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#reviews" class="nav-link">Обзоры</a></li>
+                    <li><a href="#add-review" class="nav-link">Добавить обзор</a></li>
+                    <li><a href="#top-films" class="nav-link">Топ фильмов</a></li>
+                    <li><a href="#genres" class="nav-link">Жанры</a></li>
+                    <li><a href="#about" class="nav-link">О нас</a></li>
+                </ul>
+            </nav>
+             
+            <label class="theme-switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider round"></span>
+                <i class="fas fa-moon theme-icon"></i>
+            </label>
+        </div>
+    </header>
+    *
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('pics/interstellar_bg.jpg')">
+                <div class="slide-content">
+                    <h1>Интерстеллар</h1>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.1/10</span>
+                    </div>
+                    <a href="#reviews" class="btn btn-accent">Читать обзор</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('pics/dark_knight_bg.jpg')">
+                <div class="slide-content">
+                    <h1>Темный рыцарь</h1>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>9.0/10</span>
+                    </div>
+                    <a href="#reviews" class="btn btn-accent">Читать обзор</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('pics/inception_bg.jpg')">
+                <div class="slide-content">
+                    <h1>Начало</h1>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>8.8/10</span>
+                    </div>
+                    <a href="#reviews" class="btn btn-accent">Читать обзор</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="slider-prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-dots"></div>
+            <button class="slider-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section class="search-section">
+            <form class="search-form" id="search-form">
+                <input type="text" placeholder="Название фильма или режиссер">
+                <select id="genre-filter">
+                    <option value="">Все жанры</option>
+                    <option value="драма">Драма</option>
+                    <option value="фантастика">Фантастика</option>
+                    <option value="боевик">Боевик</option>
+                    <option value="комедия">Комедия</option>
+                    <option value="триллер">Триллер</option>
+                    <option value="ужасы">Ужасы</option>
+                    <option value="фэнтези">Фэнтези</option>
+                    <option value="криминал">Криминал</option>
+                    <option value="анимация">Анимация</option>
+                    <option value="мелодрама">Мелодрама</option>
+                    <option value="детектив">Детектив</option>
+                    <option value="исторический">Исторический</option>
+                    <option value="биография">Биография</option>
+                </select>
+                <select id="year-filter">
+                    <option value="">Все годы</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2010-2019">2010-2019</option>
+                    <option value="2000-2009">2000-2009</option>
+                    <option value="1990-1999">1990-1999</option>
+                </select>
+                <select id="rating-filter">
+                    <option value="">Любой рейтинг</option>
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆ и выше</option>
+                    <option value="3">★★★☆☆ и выше</option>
+                </select>
+                <button type="submit" class="btn">Найти</button>
+            </form>
+        </section>
+        
+        <section class="reviews" id="reviews">
+            <h2 class="section-title">Обзоры фильмов</h2>
+            <div class="sort-options">
+                <span>Сортировать:</span>
+                <button class="sort-btn active" data-sort="date">По дате</button>
+                <button class="sort-btn" data-sort="rating">По рейтингу</button>
+                <button class="sort-btn" data-sort="views">По просмотрам</button>
+            </div>
+            
+            <div class="review-list" id="review-list"></div>
+            
+            <div class="pagination">
+                <button class="page-btn disabled"><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+        
+        <section class="add-review" id="add-review">
+            <h2 class="section-title">Добавить обзор</h2>
+            
+            <form class="review-form" id="review-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="film-title">Название фильма</label>
+                        <input type="text" id="film-title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="film-year">Год выпуска</label>
+                        <input type="number" id="film-year" min="1900" max="2025" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="film-director">Режиссер</label>
+                        <input type="text" id="film-director" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="film-genre">Жанр</label>
+                        <select id="film-genre" required>
+                            <option value="">Выберите жанр</option>
+                            <option value="драма">Драма</option>
+                            <option value="фантастика">Фантастика</option>
+                            <option value="боевик">Боевик</option>
+                            <option value="комедия">Комедия</option>
+                            <option value="триллер">Триллер</option>
+                            <option value="ужасы">Ужасы</option>
+                            <option value="фэнтези">Фэнтези</option>
+                            <option value="криминал">Криминал</option>
+                            <option value="анимация">Анимация</option>
+                            <option value="мелодрама">Мелодрама</option>
+                            <option value="детектив">Детектив</option>
+                            <option value="исторический">Исторический</option>
+                            <option value="биография">Биография</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="author">Ваше имя</label>
+                    <input type="text" id="author" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Оценка</label>
+                    <div class="stars" id="rating-stars">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="rating" value="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="review-text">Ваш обзор</label>
+                    <textarea id="review-text" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="film-trailer">Трейлер (YouTube URL)</label>
+                    <input type="url" id="film-trailer" placeholder="https://youtu.be/...">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-accent">Опубликовать обзор</button>
+                    <button type="reset" class="btn btn-outline">Очистить</button>
+                </div>
+            </form>
+        </section>
+        
+        <!-- Раздел "Топ фильмов" -->
+        <section class="top-films" id="top-films">
+            <h2 class="section-title">Топ 12 фильмов всех времен</h2>
+            <div class="top-list" id="top-list">
+                <!-- Ручное добавление топ-12 фильмов -->
+                <div class="top-film-item" style="background-image: url('pics/interstellar_poster.jpg')">
+                    <span class="top-film-number">1</span>
+                    <div class="top-film-info">
+                        <h3>Интерстеллар</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>9.1/10</span>
+                        </div>
+                        <div>2014, Кристофер Нолан</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/dark_knight_poster.jpg')">
+                    <span class="top-film-number">2</span>
+                    <div class="top-film-info">
+                        <h3>Темный рыцарь</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>9.0/10</span>
+                        </div>
+                        <div>2008, Кристофер Нолан</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/godfather_poster.jpg')">
+                    <span class="top-film-number">3</span>
+                    <div class="top-film-info">
+                        <h3>Крестный отец</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>9.2/10</span>
+                        </div>
+                        <div>1972, Фрэнсис Форд Коппола</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/shawshank_poster.jpg')">
+                    <span class="top-film-number">4</span>
+                    <div class="top-film-info">
+                        <h3>Побег из Шоушенка</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>9.3/10</span>
+                        </div>
+                        <div>1994, Фрэнк Дарабонт</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/pulp_fiction_poster.jpg')">
+                    <span class="top-film-number">5</span>
+                    <div class="top-film-info">
+                        <h3>Криминальное чтиво</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.9/10</span>
+                        </div>
+                        <div>1994, Квентин Тарантино</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/fight_club_poster.jpg')">
+                    <span class="top-film-number">6</span>
+                    <div class="top-film-info">
+                        <h3>Бойцовский клуб</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.8/10</span>
+                        </div>
+                        <div>1999, Дэвид Финчер</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/inception_poster.jpg')">
+                    <span class="top-film-number">7</span>
+                    <div class="top-film-info">
+                        <h3>Начало</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.8/10</span>
+                        </div>
+                        <div>2010, Кристофер Нолан</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/matrix_poster.jpg')">
+                    <span class="top-film-number">8</span>
+                    <div class="top-film-info">
+                        <h3>Матрица</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.7/10</span>
+                        </div>
+                        <div>1999, Вачовски</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/lotr_poster.jpg')">
+                    <span class="top-film-number">9</span>
+                    <div class="top-film-info">
+                        <h3>Властелин колец: Возвращение короля</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.9/10</span>
+                        </div>
+                        <div>2003, Питер Джексон</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/forrest_gump_poster.jpg')">
+                    <span class="top-film-number">10</span>
+                    <div class="top-film-info">
+                        <h3>Форрест Гамп</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.8/10</span>
+                        </div>
+                        <div>1994, Роберт Земекис</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/goodfellas_poster.jpg')">
+                    <span class="top-film-number">11</span>
+                    <div class="top-film-info">
+                        <h3>Славные парни</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.7/10</span>
+                        </div>
+                        <div>1990, Мартин Скорсезе</div>
+                    </div>
+                </div>
+                <div class="top-film-item" style="background-image: url('pics/seven_poster.jpg')">
+                    <span class="top-film-number">12</span>
+                    <div class="top-film-info">
+                        <h3>Семь</h3>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <span>8.6/10</span>
+                        </div>
+                        <div>1995, Дэвид Финчер</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Жанры -->
+        <section class="genres" id="genres">
+            <h2 class="section-title">По жанрам</h2>
+            <div class="genres-grid">
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/drama_bg.jpg')">
+                    <h3>Драма</h3>
+                    <span>356 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/sci-fi_bg.jpg')">
+                    <h3>Фантастика</h3>
+                    <span>289 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/action_bg.jpg')">
+                    <h3>Боевик</h3>
+                    <span>256 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/comedy_bg.jpg')">
+                    <h3>Комедия</h3>
+                    <span>310 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/thriller_bg.jpg')">
+                    <h3>Триллер</h3>
+                    <span>278 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/horror_bg.jpg')">
+                    <h3>Ужасы</h3>
+                    <span>232 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/fantasy_bg.jpg')">
+                    <h3>Фэнтези</h3>
+                    <span>198 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/animation_bg.jpg')">
+                    <h3>Анимация</h3>
+                    <span>176 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/melodrama_bg.jpg')">
+                    <h3>Мелодрама</h3>
+                    <span>154 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/detective_bg.jpg')">
+                    <h3>Детектив</h3>
+                    <span>132 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/historical_bg.jpg')">
+                    <h3>Исторический</h3>
+                    <span>110 обзоров</span>
+                </a>
+                <a href="#" class="genre-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('pics/biography_bg.jpg')">
+                    <h3>Биография</h3>
+                    <span>98 обзоров</span>
+                </a>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>О FilmCritic</h3>
+                    <p>FilmCritic - это платформа для настоящих ценителей кино. Мы предоставляем честные и объективные обзоры фильмов, рейтинги и рекомендации.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Разделы</h3>
+                    <ul>
+                        <li><a href="#reviews">Обзоры</a></li>
+                        <li><a href="#top-films">Топ фильмов</a></li>
+                        <li><a href="#genres">Жанры</a></li>
+                        <li><a href="#add-review">Добавить обзор</a></li>
+                        <li><a href="#">Новинки кино</a></li>
+                    </ul>
+                </div>
+                
+                <section id="about" class="footer-contacts">
+                    <h3>О нас</h3>
+                    <div class="contact-info">
+                        <a href="tel:+78005553535" class="contact-link">
+                            <i class="fas fa-phone"></i> +7 (800) 555-35-35
+                        </a>
+                        <a href="mailto:info@filmcritic.ru" class="contact-link">
+                            <i class="fas fa-envelope"></i> info@filmcritic.ru
+                        </a>
+                        <a href="https://maps.google.com/?q=Москва,+ул.+Киношная,+123" target="_blank" class="contact-link">
+                            <i class="fas fa-map-marker-alt"></i> г. Москва, ул. Киношная, 123
+                        </a>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 FilmCritic. Все права защищены.</p>
+                <div class="footer-legal">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                    <a href="#">Реклама на сайте</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <a href="#top" class="back-to-top" aria-label="Наверх">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <script src="script.js"></script>
+</body>
+</html>
