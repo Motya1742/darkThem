@@ -51,9 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Обработчик темы
+    // Обработчик темы - установка тёмной темы по умолчанию
     const themeToggle = document.getElementById('theme-toggle');
-    const currentTheme = localStorage.getItem('theme') || 'light';
+    const currentTheme = localStorage.getItem('theme') || 'dark'; // Установка тёмной темы по умолчанию
     
     if (currentTheme === 'dark') {
         themeToggle.checked = true;
@@ -129,6 +129,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Инициализация хранилища обзоров
 function initReviewsStorage() {
+    // Установка тёмной темы по умолчанию при первом посещении
+    if (!localStorage.getItem('theme')) {
+        localStorage.setItem('theme', 'dark');
+    }
+    
     let reviews = localStorage.getItem('filmReviews');
 
     if (!reviews) {
